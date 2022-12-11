@@ -1,0 +1,23 @@
+ng new angular_rest
+
+ng g c pages/HomePage
+...
+ng g c pages/XPage
+
+//app.routing.module.ts
+const routes: Routes = [
+  {
+    path: "",
+    pathMatch: "full",
+    redirectTo: "home",
+  },
+  {
+    path: "home",
+    component: HomePageComponent,
+  },
+  ...,
+  {
+    path: "**",
+    component: NotFoundPageComponent,
+  }
+];

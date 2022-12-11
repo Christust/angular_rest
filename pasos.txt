@@ -1,0 +1,110 @@
+Se inicia el proyecto:
+ng new <proyecto>
+
+Se generan los componentes dentro de la carpeta components:
+ng g c components/<componente> // g hace referencia a generate y c a component
+
+Se generan compinentes de login y register dentro de componentes/auth para manejar sesiones:
+ng g c components/auth/<component>
+
+Se crean las carpetas guards, pipes, services.
+
+Incluimos angular material:
+ng add @angular/material
+
+Creamos la carpeta models/interfaces
+
+Modificamos el json para que el comento start haga un ng serve --open ya que siempre es recomendale usar este ultimo debido a que ng serve utiliza el cli y npm run start utilizara la version del proyecto
+
+Los modulos se utilizan para componentes especificos y utilizarlos en otros modulos.
+ng g m modules/Lists
+
+Para crear componentes para este modulo se necesita colocar en la carpeta donde esta el module.ts y asi angular solo modifica el modulo que queremos y no nuestro app.module.ts
+ng g c modules/lists/<componente>
+
+En el ngModule del nuevo modulo agregamos los exports los cuales podrian ser componentes, pipes, services, etc, que deseemos que nuestro modulo principal u otro modulo que utilize este modulo pueda acceder a ellos.
+
+Para poder crear servicios se usa:
+ng g s services/<servicio>
+
+Los servicios deben devolver promesas y para ello se utiliza el objeto Promise.
+
+En el servicio retornamos un Promise.resolve(<respuesta>)
+
+Y en el controlador de donde consumamos el servicio debemos usar el metodo con then, catch y finally para la respuesta y sus posibles errores.
+
+Si necesitamos seguir emitiendo valores debemos usar un obervable en lugar de una promesa.
+
+let myObservable: Observable<tipo de observable> = new Observable((observer) => observer.next(<valor que se emite>); observer.complete()//lo termina)
+
+y al recibirlo seria con el servicio seria primero como:
+suscription = Subscriptuon | undefiend
+this.suscription = service.suscribe((res)=>actions)
+ngOnDestroy(){
+    this.suscription.unsubscribe(); //para dejar de escuchar
+}
+
+importamos el HttpClientModule de @angular/common/http
+
+al pedir un token lo podemos guardar en sessionStorage.setItem("key":value) y poder acceder a el.
+
+para las rutas indicar una ruta que no existe se utiliza "**" y asi designamos una ruta notfound
+
+Si deseamos acceder a parametros de ruta es inyectando ActivatedRoute y en el ngOnInit usar params.suscribe((params:any)=> utilizar los parametros)
+
+Para generar guards se utiliza ng g g guars/<nombre del guard>
+
+La g despues de ng g es de:
+ng g guard
+
+Para trabajar con formularios reactivos necesitamos importarlos en app.module en imports:
+import {ReactiveFormsModule, FormsModule} ...
+ReactiveFormsModule,
+
+Para usarlo necesitamos importar en el controlador del componente a usar el FormBuilder y FormGroup de @angular/forms
+
+Se instancia FormGroup y se inyecta FormBuilder:
+
+myForm = FormGroup | undefiend;
+
+contructor(private formBuilder: FormBuilder)...
+
+y en ngOnInit:
+{
+    this.myForm = this.formBuilder.group({
+        <campo>:<valor>
+    })
+
+    ...
+    //Suscribimos a los cambios del form:
+    this.myForm.valueChanges.suscribe((changes)=>{<Logica de los cambios>})
+}
+
+en el html debemos usar form y dentro de el usar [formGroup]="myForm" y en cada input del form usar el formControlName="<nombre del campo>" y colocar el nombre de los campos en myForm
+
+Para usar Material:
+por ejemplo queremos usar mat-form-field necesitamos ir a material angular y en components buscar en api la linea a importar y colocar matInput a nuestro input
+
+Para generar pipes necesitamos ejecutar:
+ng g p pipes/<nombre del pipe>
+
+Si queremos que nuestros pipes y toda la app este en un idioma necesitamos desde providers en app.module.ts colocar:
+import { NgModule, LOCALE_ID } from '@angular/core';
+
+[
+    {
+        provider: LOCALE_ID, useValue: "es"
+    }
+]
+
+y ademas colocar:
+import { registerLocaleData } from '@angular/common';
+import localeES from "@angular/common/locales/es"
+
+registerLocaleData(localeES)
+
+Se genera un modulo especifico para gestionar material:
+
+ng g m modules/material
+
+Ahi importamos los modulos a usar desde "@angular/materail..." y los colocamos en exports: [], al importar ese modulo en el app.module tendremos acceso a ellos.
