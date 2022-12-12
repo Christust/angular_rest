@@ -8,6 +8,10 @@ import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { SaludoComponent } from './components/saludo/saludo.component';
+import { FormsModule } from '@angular/forms';
+import { LoginFormComponent } from './components/auth/login-form/login-form.component';
+import { NavBarComponent } from './components/navigation/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +19,19 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
     HomePageComponent,
     LoginPageComponent,
     NotFoundPageComponent,
-    ContactPageComponent
+    ContactPageComponent,
+    SaludoComponent,
+    LoginFormComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    // Importamos FormsModule para utilizar ngModel y bindear variables
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

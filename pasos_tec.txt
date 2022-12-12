@@ -1,9 +1,27 @@
+# Iniciar el proyecto
+```
 ng new angular_rest
+```
+```
+//app.module.ts
+...
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    // Importamos FormsModule para utilizar ngModel y bindear variables
+    FormsModule,
+  ],
+...
+```
 
+# Generar componentes
+```
 ng g c pages/HomePage
 ...
 ng g c pages/XPage
-
+```
+```
 //app.routing.module.ts
 const routes: Routes = [
   {
@@ -21,3 +39,4 @@ const routes: Routes = [
     component: NotFoundPageComponent,
   }
 ];
+```

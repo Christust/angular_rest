@@ -1,1 +1,9 @@
 <p>home-page works!</p>
+<!-- Creamos un input que usando ngModel bindea una variable al valor que el posea -->
+<input type="text" [(ngModel)]="name" />
+<!-- Importamos un componente -->
+<!-- messageEmitter emitido desde el hijo hacia el padre, detona una funcion del padre con un $event (datos mandados) -->
+<app-saludo
+  [nameInput]="name"
+  (messageEmitter)="messageEmmiterReceive($event)"
+></app-saludo>
