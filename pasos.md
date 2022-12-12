@@ -14,6 +14,9 @@ imports: [
   ],
 ...
 ```
+Crear las carpetas: components, guards, models, pages, pipes y services
+
+Dentro de components crear las carpetas auth para componentes de autenticación y navigation para componentes de tipo navegación
 
 # Generar componentes
 ```
